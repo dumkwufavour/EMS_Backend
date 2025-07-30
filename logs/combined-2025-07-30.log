@@ -26,3 +26,13 @@
 2025-07-30 15:15:04 [info] Login attempt for email: favourson@gbfng.org
 2025-07-30 15:15:04 [info] Login successful for user ID: 683966d8f6428aa8b04c9243
 2025-07-30 15:15:04 [info] User logged in | meta: {"ip":"::1","email":"favourson@gbfng.org","origin":"HTTP:localhost:5000","userAgent":"PostmanRuntime/7.39.1","durationMs":272.3873}
+2025-07-30 15:28:21 [info] Login attempt for email: favourson@gbfng.org
+2025-07-30 15:28:22 [warn] Login failed - user not found: favourson@gbfng.org
+2025-07-30 15:28:22 [error] Login error | meta: {"email":"favourson@gbfng.org","error":"User not found"}
+2025-07-30 15:28:22 [error] Login failed | meta: {"ip":"::1","error":{},"origin":"HTTP:localhost:5000","userAgent":"PostmanRuntime/7.39.1","durationMs":162.5041}
+2025-07-30 15:28:22 [error] ❌ Error Handler Triggered User not found | meta: {"statusCode":500,"method":"POST","url":"/api/auth/login","stack":"Error: User not found\n    at Object.login (C:\\projects\\webprojects\\ems_backend\\services\\authService.js:18:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async login (C:\\projects\\webprojects\\ems_backend\\controllers\\authController.js:13:19)","user":null}
+2025-07-30 15:28:26 [info] Login attempt for email: favourson@gbfng.org
+2025-07-30 15:28:26 [warn] Login failed - user not found: favourson@gbfng.org
+2025-07-30 15:28:26 [error] Login error | meta: {"email":"favourson@gbfng.org","error":"User not found"}
+2025-07-30 15:28:26 [error] Login failed | meta: {"ip":"::1","error":{},"origin":"HTTP:localhost:5000","userAgent":"PostmanRuntime/7.39.1","durationMs":180.4608}
+2025-07-30 15:28:26 [error] ❌ Error Handler Triggered User not found | meta: {"statusCode":500,"method":"POST","url":"/api/auth/login","stack":"Error: User not found\n    at Object.login (C:\\projects\\webprojects\\ems_backend\\services\\authService.js:18:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async login (C:\\projects\\webprojects\\ems_backend\\controllers\\authController.js:13:19)","user":null}

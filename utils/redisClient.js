@@ -14,7 +14,7 @@ async function initRedis() {
     return client;
   }
 
-  const redisUrl = process.env.REDIS_URL;
+  const redisUrl = process.env.REDIS_URL_2;
   if (!redisUrl) {
     throw new Error("REDIS_URL not found in environment variables");
   }

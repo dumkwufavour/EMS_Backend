@@ -21,8 +21,6 @@ app.use(cookieParser()); // <-- add cookie-parser middleware
 
 const allowedOrigins = [
   "http://localhost:3000",
-  // "https://gbf-portal.vercel.app",
-  // "https://gbf-ems.onrender.com",
 ];
 
 const corsOptions = {
