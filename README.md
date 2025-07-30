@@ -19,7 +19,7 @@ This backend service powers an employee management platform, enabling:
 ## ⚙️ Tech Stack
 
 | Layer           | Technology                         |
-|----------------|-------------------------------------|
+|-----------------|-------------------------------------|
 | Runtime         | Node.js (JavaScript)               |
 | Framework       | Express.js                         |
 | Database        | MongoDB (Mongoose ODM)             |
@@ -37,7 +37,7 @@ This backend service powers an employee management platform, enabling:
 
 | Method | Endpoint           | Description                             | Auth Required |
 |--------|--------------------|-----------------------------------------|---------------|
-| POST   | `/login`           | Authenticate as employee or admin       | ❌            |
+| POST   | `/login`           | Authenticate as employee or admin       | ✅            |
 | GET    | `/me`              | Get current session user info           | ✅            |
 | PUT    | `/me`              | Update current admin profile            | ✅ (Admin)     |
 | POST   | `/me/logout=true`  | Logout authenticated user               | ✅            |
