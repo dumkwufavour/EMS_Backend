@@ -1,0 +1,24 @@
+2025-07-24 22:18:25 [info] Login attempt for email: favourson@gbfng.org
+2025-07-24 22:18:25 [warn] Login failed - invalid password: favourson@gbfng.org
+2025-07-24 22:18:25 [error] Login error | meta: {"email":"favourson@gbfng.org","error":"Invalid credentials"}
+2025-07-24 22:18:25 [error] Login failed | meta: {"ip":"::1","error":{},"origin":"HTTP:localhost:5000","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36","durationMs":413.8555}
+2025-07-24 22:18:25 [error] ❌ Error Handler Triggered Invalid credentials | meta: {"statusCode":500,"method":"POST","url":"/api/auth/login","stack":"Error: Invalid credentials\n    at Object.login (C:\\projects\\webprojects\\gbf_test\\services\\authService.js:27:13)\n    at async login (C:\\projects\\webprojects\\gbf_test\\controllers\\authController.js:13:19)","user":null}
+2025-07-24 22:18:34 [info] Login attempt for email: favourson@gbfng.org
+2025-07-24 22:18:36 [warn] Login failed - invalid password: favourson@gbfng.org
+2025-07-24 22:18:36 [error] Login error | meta: {"email":"favourson@gbfng.org","error":"Invalid credentials"}
+2025-07-24 22:18:36 [error] Login failed | meta: {"ip":"::1","error":{},"origin":"HTTP:localhost:5000","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36","durationMs":1172.4916}
+2025-07-24 22:18:36 [error] ❌ Error Handler Triggered Invalid credentials | meta: {"statusCode":500,"method":"POST","url":"/api/auth/login","stack":"Error: Invalid credentials\n    at Object.login (C:\\projects\\webprojects\\gbf_test\\services\\authService.js:27:13)\n    at async login (C:\\projects\\webprojects\\gbf_test\\controllers\\authController.js:13:19)","user":null}
+2025-07-24 22:18:42 [info] Login attempt for email: favourson@gbfng.org
+2025-07-24 22:18:43 [info] Login successful for user ID: 683966d8f6428aa8b04c9243
+2025-07-24 22:18:43 [info] User logged in | meta: {"ip":"::1","email":"favourson@gbfng.org","origin":"HTTP:localhost:5000","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36","durationMs":766.4321}
+2025-07-24 22:18:43 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:18:51 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:18:52 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:18:58 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:18:59 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:19:01 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:19:01 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:19:07 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:19:09 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:20:35 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}
+2025-07-24 22:21:18 [info] Token verified successfully | meta: {"userId":"683966d8f6428aa8b04c9243","isAdmin":true}

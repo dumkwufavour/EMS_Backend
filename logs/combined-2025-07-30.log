@@ -1,0 +1,28 @@
+2025-07-30 15:12:36 [info] Login attempt for email: favourson@gbf.org
+2025-07-30 15:12:36 [warn] Login failed - user not found: favourson@gbf.org
+2025-07-30 15:12:36 [error] Login error | meta: {"email":"favourson@gbf.org","error":"User not found"}
+2025-07-30 15:12:36 [error] Login failed | meta: {"ip":"::1","error":{},"origin":"HTTP:localhost:5000","userAgent":"PostmanRuntime/7.39.1","durationMs":187.6601}
+2025-07-30 15:12:36 [error] ❌ Error Handler Triggered User not found | meta: {"statusCode":500,"method":"POST","url":"/api/auth/login","stack":"Error: User not found\n    at Object.login (C:\\projects\\webprojects\\ems_backend\\services\\authService.js:18:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async login (C:\\projects\\webprojects\\ems_backend\\controllers\\authController.js:13:19)","user":null}
+2025-07-30 15:12:43 [info] Login attempt for email: favourson@gbf.org
+2025-07-30 15:12:43 [warn] Login failed - user not found: favourson@gbf.org
+2025-07-30 15:12:43 [error] Login error | meta: {"email":"favourson@gbf.org","error":"User not found"}
+2025-07-30 15:12:43 [error] Login failed | meta: {"ip":"::1","error":{},"origin":"HTTP:localhost:5000","userAgent":"PostmanRuntime/7.39.1","durationMs":147.846}
+2025-07-30 15:12:43 [error] ❌ Error Handler Triggered User not found | meta: {"statusCode":500,"method":"POST","url":"/api/auth/login","stack":"Error: User not found\n    at Object.login (C:\\projects\\webprojects\\ems_backend\\services\\authService.js:18:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async login (C:\\projects\\webprojects\\ems_backend\\controllers\\authController.js:13:19)","user":null}
+2025-07-30 15:12:50 [info] Login attempt for email: favour@gbf.org
+2025-07-30 15:12:50 [warn] Login failed - user not found: favour@gbf.org
+2025-07-30 15:12:50 [error] Login error | meta: {"email":"favour@gbf.org","error":"User not found"}
+2025-07-30 15:12:50 [error] Login failed | meta: {"ip":"::1","error":{},"origin":"HTTP:localhost:5000","userAgent":"PostmanRuntime/7.39.1","durationMs":153.7798}
+2025-07-30 15:12:50 [error] ❌ Error Handler Triggered User not found | meta: {"statusCode":500,"method":"POST","url":"/api/auth/login","stack":"Error: User not found\n    at Object.login (C:\\projects\\webprojects\\ems_backend\\services\\authService.js:18:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async login (C:\\projects\\webprojects\\ems_backend\\controllers\\authController.js:13:19)","user":null}
+2025-07-30 15:14:13 [info] Login attempt for email: isioma@gbf.org
+2025-07-30 15:14:13 [warn] Login failed - user not found: isioma@gbf.org
+2025-07-30 15:14:13 [error] Login error | meta: {"email":"isioma@gbf.org","error":"User not found"}
+2025-07-30 15:14:13 [error] Login failed | meta: {"ip":"::1","error":{},"origin":"HTTP:localhost:5000","userAgent":"PostmanRuntime/7.39.1","durationMs":196.385}
+2025-07-30 15:14:13 [error] ❌ Error Handler Triggered User not found | meta: {"statusCode":500,"method":"POST","url":"/api/auth/login","stack":"Error: User not found\n    at Object.login (C:\\projects\\webprojects\\ems_backend\\services\\authService.js:18:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async login (C:\\projects\\webprojects\\ems_backend\\controllers\\authController.js:13:19)","user":null}
+2025-07-30 15:14:57 [info] Login attempt for email: favourson@gbfng.org
+2025-07-30 15:14:57 [warn] Login failed - invalid password: favourson@gbfng.org
+2025-07-30 15:14:57 [error] Login error | meta: {"email":"favourson@gbfng.org","error":"Invalid credentials"}
+2025-07-30 15:14:57 [error] Login failed | meta: {"ip":"::1","error":{},"origin":"HTTP:localhost:5000","userAgent":"PostmanRuntime/7.39.1","durationMs":332.9177}
+2025-07-30 15:14:57 [error] ❌ Error Handler Triggered Invalid credentials | meta: {"statusCode":500,"method":"POST","url":"/api/auth/login","stack":"Error: Invalid credentials\n    at Object.login (C:\\projects\\webprojects\\ems_backend\\services\\authService.js:27:13)\n    at async login (C:\\projects\\webprojects\\ems_backend\\controllers\\authController.js:13:19)","user":null}
+2025-07-30 15:15:04 [info] Login attempt for email: favourson@gbfng.org
+2025-07-30 15:15:04 [info] Login successful for user ID: 683966d8f6428aa8b04c9243
+2025-07-30 15:15:04 [info] User logged in | meta: {"ip":"::1","email":"favourson@gbfng.org","origin":"HTTP:localhost:5000","userAgent":"PostmanRuntime/7.39.1","durationMs":272.3873}
