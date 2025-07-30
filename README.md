@@ -1,337 +1,196 @@
-employee-management-system/
-│
-├── src/
-│ ├── config/ # DB config, environment config
-│ │ └── db.js
-│ │ └── dotenv.js
-│ │
-│ ├── controllers/ # Request handlers
-│ │ ├── auth.controller.js
-│ │ ├── employee.controller.js
-│ │ └── admin.controller.js
-│ │
-│ ├── middlewares/ # Auth and error handling middleware
-│ │ ├── auth.middleware.js
-│ │ ├── role.middleware.js
-│ │ └── error.middleware.js
-│ │
-│ ├── models/ # DB models or ORM schemas
-│ │ └── employee.model.js
-│ │
-│ ├── routes/ # All route definitions
-│ │ ├── auth.routes.js
-│ │ ├── employee.routes.js
-│ │ └── admin.routes.js
-│ │
-│ ├── services/ # Business logic (e.g., QR code generation)
-│ │ ├── auth.service.js
-│ │ ├── employee.service.js
-│ │ └── qrcode.service.js
-│ │
-│ ├── utils/ # Utility functions (e.g., password hashing)
-│ │ ├── hash.util.js
-│ │ └── token.util.js
-│ │
-│ ├── app.js # Express app setup
-│ └── server.js # Server entry point
-│
-├── .env # Environment variables
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── node_modules
-└── README.md
+# 🧭 Employee Management System – Backend API
 
-### 1. **Auth Routes (Login)**
+A secure, scalable, and auditable REST API for managing employees, designed with enterprise-ready features. Built using **Node.js**, **Express**, and **MongoDB**, with security, audit logging, and role-based access control at its core.
 
-**Route**: `/api/auth/login`
-**Method**: `POST`
+---
 
-- **Request Body**:
+## 📌 Overview
 
-```json
+This backend service powers an employee management platform, enabling:
+
+- Secure **admin and employee authentication**
+- Centralized **employee record management**
+- Public employee profile viewing
+- Audit trails for accountability
+- RESTful API design, ready for frontend or mobile consumption
+
+---
+
+## ⚙️ Tech Stack
+
+| Layer           | Technology                         |
+|----------------|-------------------------------------|
+| Runtime         | Node.js (JavaScript)               |
+| Framework       | Express.js                         |
+| Database        | MongoDB (Mongoose ODM)             |
+| Auth & Session  | JWT + HttpOnly Cookies             |
+| Security        | Helmet, CORS, Rate Limiting        |
+| Cache/Session   | Redis (via `createClient`)         |
+| Utilities       | Morgan, Cookie-Parser              |
+| Audit Logging   | Custom audit logs with metadata    |
+
+---
+
+## 🚀 API Endpoints
+
+### 🔐 Authentication (`/api/auth`)
+
+| Method | Endpoint           | Description                             | Auth Required |
+|--------|--------------------|-----------------------------------------|---------------|
+| POST   | `/login`           | Authenticate as employee or admin       | ❌            |
+| GET    | `/me`              | Get current session user info           | ✅            |
+| PUT    | `/me`              | Update current admin profile            | ✅ (Admin)     |
+| POST   | `/me/logout=true`  | Logout authenticated user               | ✅            |
+
+---
+
+### 👤 Employee Self-Service (`/api/employees`)
+
+| Method | Endpoint           | Description                             | Auth Required |
+|--------|--------------------|-----------------------------------------|---------------|
+| GET    | `/me`              | View own employee profile               | ✅ (Employee)  |
+| PUT    | `/me`              | Update own employee data                | ✅ (Employee)  |
+| POST   | `/me/logout=true`  | Logout employee                         | ✅            |
+
+---
+
+### 🛠️ Admin Management (`/api/admin/employees`)
+
+| Method | Endpoint           | Description                             | Auth Required |
+|--------|--------------------|-----------------------------------------|---------------|
+| GET    | `/`                | List all employees                      | ✅ (Admin)     |
+| GET    | `/:id`             | View details of one employee            | ✅ (Admin)     |
+| POST   | `/`                | Create a new employee record            | ✅ (Admin)     |
+| PUT    | `/:id`             | Update employee information             | ✅ (Admin)     |
+| DELETE | `/:id`             | Delete an employee                      | ✅ (Admin)     |
+
+---
+
+### 🌍 Public Routes (`/api/public`)
+
+| Method | Endpoint                  | Description                             | Auth Required |
+|--------|---------------------------|-----------------------------------------|---------------|
+| GET    | `/employee/:id`           | Public employee profile (business card) | ❌            |
+| GET    | `/employees/search?q=...` | Search public profiles by query         | ❌            |
+
+---
+
+## 🛡️ Key Features
+
+### ✅ Authentication & Session
+- Cookie-based auth using `HttpOnly` tokens
+- Role-based access control (Admin & Employee)
+- Protected routes using custom `authMiddleware`
+
+### 🧠 Audit Logging
+Every login, logout, or profile update is logged with:
+- Timestamp
+- User role
+- IP address (parsed using `utils/getClientIp.js`)
+- User agent
+
+### 🧰 Utility Modules
+- **Redis**: Configured via `initRedis()` for scalable state/cache management
+- **Client IP Detection**: Smart resolution using headers and socket fallback
+- **Error Handling**: Centralized, formatted, developer-friendly
+
+### 🔐 Security
+- CORS with origin whitelisting
+- Helmet for HTTP header hardening
+- Express Rate Limiting (recommended with Redis for production)
+- Input validation and sanitization (suggested with Joi or Zod)
+
+---
+
+## 🌡️ Health Check
+
+| Method | Endpoint     | Description                  |
+|--------|--------------|------------------------------|
+| GET    | `/health`    | Returns `{ status: "ok" }`   |
+
+---
+
+## 🧪 Example Usage
+
+**Login Request**
+```http
+POST /api/auth/login
+Content-Type: application/json
+
 {
-  "email": "favour@gbf.org",
-  "password": "1Koa05JRWt14"
+  "email": "john@example.com",
+  "password": "securepassword123"
 }
+````
+
+**Public Employee Profile**
+
+```http
+GET /api/public/employee/64a2f6c78bf2d6a...
 ```
 
-- **Response** (Success):
+---
 
-```json
-{
-  "token": "your_jwt_token_here"
-}
+## 🏁 Getting Started
+
+1. **Install Dependencies**
+
+```bash
+npm install
 ```
 
-- **Response** (Error):
+2. **Configure Environment**
+   Create a `.env` file with:
 
-```json
-{
-  "message": "Invalid credentials"
-}
+```env
+PORT=5000
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_secret_key
+COOKIE_DOMAIN=localhost
 ```
 
-### 2. **Employee Routes (Authenticated User)**
+3. **Run the Server**
 
-**Route**: `/api/employees/me`
-**Method**: `GET`
-
-- **Headers**:
-
-  - Authorization: `Bearer <your_jwt_token_here>`
-
-- **Response** (Success):
-
-```json
-{
-  "_id": "employee-id",
-  "full_name": "John Doe",
-  "email": "john.doe@example.com",
-  "department": "Engineering",
-  "position": "Software Engineer",
-  "photo_url": "http://example.com/photo.jpg",
-  "qr_code_url": "http://example.com/qr-code.png"
-}
+```bash
+npm run dev
 ```
 
-### 3. **Public Routes (Public Employee Profile)**
+---
 
-**Route**: `/api/public/employee/:id`
-**Method**: `GET`
+## 🗃️ Project Structure
 
-- **Response** (Success):
-
-```json
-{
-  "full_name": "John Doe",
-  "department": "Engineering",
-  "position": "Software Engineer",
-  "photo_url": "http://example.com/photo.jpg"
-}
+```
+├── app.js
+├── server.js
+├── routes/
+│   ├── authRoutes.js
+│   ├── employeeRoutes.js
+│   ├── adminRoutes.js
+│   └── publicRoutes.js
+├── controllers/
+├── middleware/
+├── utils/
+└── config/
 ```
 
-- **Response** (Error):
+---
 
-```json
-{
-  "message": "Employee not found"
-}
-```
+## 👩‍💻 For Recruiters & Stakeholders
 
-### 4. **Admin Routes (Admin Access Only)**
+This project demonstrates:
 
-#### 4.1. **Create a New Employee (Admin Only)**
+* Clean architecture and modularity
+* Security best practices (cookie auth, IP logs, role protection)
+* Scalable architecture via Redis and centralized logs
+* Designed for easy integration with modern frontends (Next.js, mobile apps)
 
-**Route**: `/api/admin/employees`
-**Method**: `POST`
+If you're a tech lead or a recruiter, this codebase shows real-world readiness, with both developer ergonomics and production reliability in mind.
 
-- **Headers**:
+---
 
-  - Authorization: `Bearer <your_jwt_token_here>`
+## 📬 Contact
 
-- **Request Body**:
+Feel free to reach out for questions, collaboration, or a technical walkthrough.
 
-```json
-{
-  "full_name": "Jane Doe",
-  "email": "jane.doe@example.com",
-  "password": "password123",
-  "department": "HR",
-  "position": "HR Manager",
-  "photo_url": "http://example.com/photo.jpg",
-  "is_admin": false
-}
-```
-
-- **Response** (Success):
-
-```json
-{
-  "_id": "new-employee-id",
-  "full_name": "Jane Doe",
-  "email": "jane.doe@example.com",
-  "department": "HR",
-  "position": "HR Manager",
-  "photo_url": "http://example.com/photo.jpg",
-  "is_admin": false,
-  "qr_code_url": "http://example.com/qr-code.png"
-}
-```
-
-- **Response** (Error):
-
-```json
-{
-  "message": "Email already in use"
-}
-```
-
-#### 4.2. **Get All Employees (Admin Only)**
-
-**Route**: `/api/admin/employees`
-**Method**: `GET`
-
-- **Headers**:
-
-  - Authorization: `Bearer <your_jwt_token_here>`
-
-- **Response** (Success):
-
-```json
-[
-  {
-    "_id": "employee-id",
-    "full_name": "John Doe",
-    "email": "john.doe@example.com",
-    "department": "Engineering",
-    "position": "Software Engineer",
-    "photo_url": "http://example.com/photo.jpg",
-    "qr_code_url": "http://example.com/qr-code.png"
-  },
-  {
-    "_id": "another-employee-id",
-    "full_name": "Jane Doe",
-    "email": "jane.doe@example.com",
-    "department": "HR",
-    "position": "HR Manager",
-    "photo_url": "http://example.com/photo2.jpg",
-    "qr_code_url": "http://example.com/qr-code2.png"
-  }
-]
-```
-
-#### 4.3. **Get an Employee by ID (Admin Only)**
-
-**Route**: `/api/admin/employees/:id`
-**Method**: `GET`
-
-- **Headers**:
-
-  - Authorization: `Bearer <your_jwt_token_here>`
-
-- **Response** (Success):
-
-```json
-{
-  "_id": "employee-id",
-  "full_name": "John Doe",
-  "email": "john.doe@example.com",
-  "department": "Engineering",
-  "position": "Software Engineer",
-  "photo_url": "http://example.com/photo.jpg",
-  "qr_code_url": "http://example.com/qr-code.png"
-}
-```
-
-- **Response** (Error):
-
-```json
-{
-  "message": "Employee not found"
-}
-```
-
-#### 4.4. **Update Employee Details (Admin Only)**
-
-**Route**: `/api/admin/employees/:id`
-**Method**: `PUT`
-
-- **Headers**:
-
-  - Authorization: `Bearer <your_jwt_token_here>`
-
-- **Request Body**:
-
-```json
-{
-  "full_name": "John Smith",
-  "email": "john.smith@example.com",
-  "department": "Engineering",
-  "position": "Lead Developer",
-  "photo_url": "http://example.com/photo-updated.jpg",
-  "is_admin": false
-}
-```
-
-- **Response** (Success):
-
-```json
-{
-  "_id": "employee-id",
-  "full_name": "John Smith",
-  "email": "john.smith@example.com",
-  "department": "Engineering",
-  "position": "Lead Developer",
-  "photo_url": "http://example.com/photo-updated.jpg",
-  "is_admin": false,
-  "qr_code_url": "http://example.com/qr-code-updated.png"
-}
-```
-
-- **Response** (Error):
-
-```json
-{
-  "message": "Employee not found"
-}
-```
-
-#### 4.5. **Delete an Employee (Admin Only)**
-
-**Route**: `/api/admin/employees/:id`
-**Method**: `DELETE`
-
-- **Headers**:
-
-  - Authorization: `Bearer <your_jwt_token_here>`
-
-- **Response** (Success):
-
-```json
-{
-  "message": "Employee deleted successfully"
-}
-```
-
-- **Response** (Error):
-
-```json
-{
-  "message": "Employee not found"
-}
-```
-
-#### 4.6. **Get the QR Code for an Employee (Admin Only)**
-
-**Route**: `/api/admin/qr/:id`
-**Method**: `GET`
-
-- **Headers**:
-
-  - Authorization: `Bearer <your_jwt_token_here>`
-
-- **Response** (Success):
-
-```json
-{
-  "qr_code_url": "http://example.com/qr-code.png"
-}
-```
-
-### Summary of Endpoints:
-
-- `/api/auth/login` - `POST` - Login an employee
-- `/api/employees/me` - `GET` - Get the authenticated employee's details
-- `/api/public/employee/:id` - `GET` - Get a public employee profile
-- `/api/admin/employees` - `POST` - Create a new employee (Admin)
-- `/api/admin/employees` - `GET` - Get all employees (Admin)
-- `/api/admin/employees/:id` - `GET` - Get employee by ID (Admin)
-- `/api/admin/employees/:id` - `PUT` - Update an employee (Admin)
-- `/api/admin/employees/:id` - `DELETE` - Delete an employee (Admin)
-- `/api/admin/qr/:id` - `GET` - Get QR code for an employee (Admin)
-
-### Testing Tips:
-
-- **Authentication**: For any route requiring authentication, you'll need to include the JWT token in the request headers (`Authorization: Bearer <your_jwt_token_here>`).
-- **Admin Roles**: Routes like `createEmployee`, `getAllEmployees`, `updateEmployee`, etc., are protected by the `roleMiddleware("admin")`, so ensure you're testing with an admin account.
+## Favour Dumkwu
+[LinkedIn](https://www.linkedin.com/in/favour-dumkwu) | [GitHub](https://github.com/dumkwufavour) | [Email](mailto:favourson71@gmail.com)
